@@ -1,5 +1,6 @@
 use std::io::Write;
 use std::iter::once;
+use std::path::{Path, PathBuf};
 use std::process::{Command, Stdio};
 
 use dialoguer::Select;
@@ -21,10 +22,18 @@ pub fn worktrees() -> Result<(), String> {
         .items(&choices)
         .interact()
         .map_err(|error| format!("choose a worktree: {error}"))?;
-    let path = &entries[selection].path;
-    copy_to_clipboard(path)?;
-    println!("copied {path}");
+    let selected = &entries[selection];
+    copy_to_clipboard(&selected.path)?;
+    println!("copied {}", selected.path);
+    println!();
+    println!("branch: {}", selected.branch);
+    println!("worktree: {}", selected.path);
+    println!("plans: {}", plan_path(&selected.path, &selected.branch).display());
     Ok(())
+}
+
+fn plan_path(worktree: &str, branch: &str) -> PathBuf {
+    Path::new(worktree).join("docs/agents/plans").join(branch)
 }
 
 fn parse_worktrees(output: &str) -> Result<Vec<Worktree>, String> {
