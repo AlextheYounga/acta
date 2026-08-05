@@ -260,7 +260,7 @@ A tentative command surface is:
 ```bash
 acta start <type> <name>
 acta clarify <name>
-acta path
+acta init
 ```
 
 Exact naming may change during implementation.
@@ -332,11 +332,11 @@ Possible result:
 04-authentication-scope-clarity.md
 ```
 
-### `acta path`
+### `acta init`
 
-The path command should print the planning directory associated with the current branch.
+The init command should prepare an existing Git repository for Acta.
 
-This gives agents and scripts a stable interface without requiring them to duplicate Acta’s path rules.
+It should create the planning directory root and `.worktrees/`, then add the Acta exclusion block to the repository-local Git exclude file. Initialization should be idempotent and should not configure Git Flow or modify committed project files.
 
 ## Git Flow Integration
 
@@ -498,4 +498,3 @@ The following decisions have been made:
 * Markdown templates will be stored as separate files and embedded into the binary.
 * Git Flow will remain responsible for branch relationships and finishing behavior.
 * An accompanying skill will teach agents to use Acta consistently.
-
