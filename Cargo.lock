@@ -9,6 +9,7 @@ dependencies = [
  "clap",
  "dialoguer",
  "syn 2.0.119",
+ "tempfile",
 ]
 
 [[package]]
