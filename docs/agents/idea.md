@@ -337,7 +337,7 @@ Possible result:
 
 The init command should prepare an existing Git repository for Acta.
 
-It should create the planning directory root and `.worktrees/`, then add the Acta exclusion block to the repository-local Git exclude file. Initialization should be idempotent and should not configure Git Flow or modify committed project files.
+It should first verify that `~/.agents/skills/acta/SKILL.md` exists. It should then create the planning directory root and `.worktrees/`, and add the Acta exclusion block to the repository-local Git exclude file. Initialization should be idempotent and should not configure Git Flow or modify committed project files.
 
 ### `acta agentsmd`
 
@@ -386,6 +386,8 @@ The skill should instruct agents to:
 * Leave Git Flow responsible for branch lifecycle operations.
 
 The skill should call the Acta CLI rather than reproducing Git commands or path construction manually.
+
+The skill template lives at `templates/skills/acta/SKILL.md` and should be installed at `~/.agents/skills/acta/SKILL.md`. The `init` command should verify that installation exists before preparing a repository, but should not modify the user's global skills directory.
 
 ## Rust Implementation Direction
 
