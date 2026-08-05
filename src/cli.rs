@@ -38,9 +38,8 @@ pub fn parse() -> Cli {
 }
 
 fn parse_topic_branch(branch: &str) -> Result<(&str, &str), String> {
-    let (topic_type, name) = branch
-        .split_once('/')
-        .ok_or_else(|| format!("invalid branch `{branch}`; use `<type>/<name>`"))?;
+    let (topic_type, name) =
+        branch.split_once('/').ok_or_else(|| format!("invalid branch `{branch}`; use `<type>/<name>`"))?;
     validate_name(topic_type, "topic type")?;
     validate_name(name, "change name")?;
     Ok((topic_type, name))

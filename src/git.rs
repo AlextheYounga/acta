@@ -7,11 +7,7 @@ pub fn git(command: &str, args: &[&str]) -> Result<String, String> {
 }
 
 pub fn git_status(command: &str, args: &[&str]) -> Result<Output, String> {
-    Command::new("git")
-        .arg(command)
-        .args(args)
-        .output()
-        .map_err(|error| format!("run `git {command}`: {error}"))
+    Command::new("git").arg(command).args(args).output().map_err(|error| format!("run `git {command}`: {error}"))
 }
 
 fn command_error(command: &str, args: &[&str], output: &Output) -> String {

@@ -15,11 +15,7 @@ pub fn write_new(path: &Path, contents: &str) -> Result<(), String> {
 
 pub fn add_exclude(root: &Path) -> Result<(), String> {
     let common = PathBuf::from(git("rev-parse", &["--git-common-dir"])?);
-    let common = if common.is_absolute() {
-        common
-    } else {
-        root.join(common)
-    };
+    let common = if common.is_absolute() { common } else { root.join(common) };
     let info = common.join("info");
     fs::create_dir_all(&info).map_err(|error| format!("create Git info directory: {error}"))?;
     let exclude = info.join("exclude");
@@ -35,8 +31,7 @@ pub fn add_exclude(root: &Path) -> Result<(), String> {
     if !existing.is_empty() && !existing.ends_with('\n') {
         writeln!(file).map_err(|error| error.to_string())?;
     }
-    writeln!(file, "# begin acta\n/.worktrees/\n# end acta")
-        .map_err(|error| format!("write Git exclude file: {error}"))
+    writeln!(file, "# begin acta\n/.worktrees/\n# end acta").map_err(|error| format!("write Git exclude file: {error}"))
 }
 
 pub fn validate_name(value: &str, label: &str) -> Result<(), String> {
@@ -44,14 +39,11 @@ pub fn validate_name(value: &str, label: &str) -> Result<(), String> {
         || value == "."
         || value == ".."
         || value.starts_with('-')
-        || value.chars().any(|character| {
-            character.is_whitespace()
-                || !matches!(character, 'a'..='z' | '0'..='9' | '-' | '_' | '.')
-        })
+        || value
+            .chars()
+            .any(|character| character.is_whitespace() || !matches!(character, 'a'..='z' | '0'..='9' | '-' | '_' | '.'))
     {
-        return Err(format!(
-            "invalid {label} `{value}`; use lowercase letters, numbers, `-`, `_`, or `.`"
-        ));
+        return Err(format!("invalid {label} `{value}`; use lowercase letters, numbers, `-`, `_`, or `.`"));
     }
     Ok(())
 }

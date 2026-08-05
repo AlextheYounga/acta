@@ -9,25 +9,18 @@ pub fn start(topic_type: &str, name: &str) -> Result<(), String> {
     }
 
     let branch = format!("{topic_type}/{name}");
-    if git_status("show-ref", &["--verify", &format!("refs/heads/{branch}")])?
-        .status
-        .success()
-    {
+    if git_status("show-ref", &["--verify", &format!("refs/heads/{branch}")])?.status.success() {
         return Err(format!("branch `{branch}` already exists"));
     }
     let worktree = root.join(".worktrees").join(&branch);
     if worktree.exists() {
-        return Err(format!(
-            "worktree path `{}` already exists",
-            worktree.display()
-        ));
+        return Err(format!("worktree path `{}` already exists", worktree.display()));
     }
 
     // Git Flow owns topic configuration and branch creation.
     git("flow", &[topic_type, "start", name])?;
-    git("checkout", &[&original_branch]).map_err(|error| {
-        format!("created `{branch}`, but could not restore `{original_branch}`: {error}")
-    })?;
+    git("checkout", &[&original_branch])
+        .map_err(|error| format!("created `{branch}`, but could not restore `{original_branch}`: {error}"))?;
 
     git("worktree", &["add", &worktree.to_string_lossy(), &branch])?;
 
