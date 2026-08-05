@@ -261,6 +261,7 @@ A tentative command surface is:
 acta start <type>/<name>
 acta clarify <name>
 acta init
+acta agentsmd
 ```
 
 Exact naming may change during implementation.
@@ -337,6 +338,10 @@ Possible result:
 The init command should prepare an existing Git repository for Acta.
 
 It should create the planning directory root and `.worktrees/`, then add the Acta exclusion block to the repository-local Git exclude file. Initialization should be idempotent and should not configure Git Flow or modify committed project files.
+
+### `acta agentsmd`
+
+The agentsmd command should present the Markdown files in `templates/agentsmd/` as a selection menu, then write the selected template to `AGENTS.md` in the current directory. It must refuse to overwrite an existing `AGENTS.md`.
 
 ## Git Flow Integration
 
