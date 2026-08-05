@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -euo pipefail
+
+agent_files_dir="$HOME/.agents/agentsmd"
+default="v1"
+key="${1:-$default}"
+
+shopt -s nullglob
+
+matched_files=("$agent_files_dir"/*."$key".md)
+
+if [ ${#matched_files[@]} -eq 0 ]; then
+	echo "No files found for key: $key"
+	exit 1
+fi
+
+selected_file="${matched_files[0]}"
+
+echo "Selected file: $selected_file"
+cp "$selected_file" "$PWD/AGENTS.md"

@@ -4,10 +4,10 @@ use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::process::{Command, Output};
 
-const IDEA_TEMPLATE: &str = include_str!("../templates/01-idea.md");
-const PLAN_TEMPLATE: &str = include_str!("../templates/02-plan.md");
-const TASKS_TEMPLATE: &str = include_str!("../templates/03-tasks.md");
-const CLARIFICATION_TEMPLATE: &str = include_str!("../templates/clarity.md");
+const IDEA_TEMPLATE: &str = include_str!("../templates/planning/01-idea.md");
+const PLAN_TEMPLATE: &str = include_str!("../templates/planning/02-plan.md");
+const TASKS_TEMPLATE: &str = include_str!("../templates/planning/03-tasks.md");
+const CLARIFICATION_TEMPLATE: &str = include_str!("../templates/planning/clarity.md");
 
 #[derive(Parser)]
 #[command(name = "acta", about = "Create and maintain lightweight change plans")]
@@ -19,7 +19,7 @@ struct Cli {
 #[derive(Subcommand)]
 enum CommandKind {
     Init,
-    Start { topic_type: String, name: String },
+    Start { branch: String },
     Clarify { name: String },
 }
 
@@ -33,9 +33,21 @@ fn main() {
 fn run(cli: Cli) -> Result<(), String> {
     match cli.command {
         CommandKind::Init => init(),
-        CommandKind::Start { topic_type, name } => start(&topic_type, &name),
+        CommandKind::Start { branch } => {
+            let (topic_type, name) = parse_topic_branch(&branch)?;
+            start(topic_type, name)
+        }
         CommandKind::Clarify { name } => clarify(&name),
     }
+}
+
+fn parse_topic_branch(branch: &str) -> Result<(&str, &str), String> {
+    let (topic_type, name) = branch
+        .split_once('/')
+        .ok_or_else(|| format!("invalid branch `{branch}`; use `<type>/<name>`"))?;
+    validate_name(topic_type, "topic type")?;
+    validate_name(name, "change name")?;
+    Ok((topic_type, name))
 }
 
 fn init() -> Result<(), String> {
@@ -214,5 +226,15 @@ mod tests {
         assert!(validate_name("../outside", "name").is_err());
         assert!(validate_name("change name", "name").is_err());
         assert!(validate_name("safe-change", "name").is_ok());
+    }
+
+    #[test]
+    fn topic_branch_is_split_into_type_and_name() {
+        assert_eq!(
+            super::parse_topic_branch("feat/mytask"),
+            Ok(("feat", "mytask"))
+        );
+        assert!(super::parse_topic_branch("mytask").is_err());
+        assert!(super::parse_topic_branch("feat/my/task").is_err());
     }
 }

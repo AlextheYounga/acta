@@ -258,7 +258,7 @@ The first version of the CLI should remain small.
 A tentative command surface is:
 
 ```bash
-acta start <type> <name>
+acta start <type>/<name>
 acta clarify <name>
 acta init
 ```
@@ -284,7 +284,7 @@ The start command should:
 Example:
 
 ```bash
-acta start refactor media-storage
+acta start refactor/media-storage
 ```
 
 Expected branch:
