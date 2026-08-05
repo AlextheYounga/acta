@@ -16,3 +16,4 @@ pub const CONVENTION_TEMPLATES: &[(&str, &str)] = &[
     ("clean-code.md", include_str!("../../templates/conventions/clean-code.md")),
     ("abstraction-guide.md", include_str!("../../templates/conventions/abstraction-guide.md")),
 ];
+pub const ACTA_SKILL: &str = include_str!("../../templates/skills/acta/SKILL.md");

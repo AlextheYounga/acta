@@ -6,19 +6,13 @@ Acta creates lightweight planning records for non-trivial software changes. It u
 
 ## Setup
 
-Install the skill from `templates/skills/acta/SKILL.md` at:
-
-```text
-~/.agents/skills/acta/SKILL.md
-```
-
-Then initialize a Git repository:
+Initialize a Git repository:
 
 ```bash
 acta init
 ```
 
-Initialization also places the bundled conventions in `docs/agents/conventions/` without overwriting existing files.
+Initialization installs the embedded Acta skill at `~/.agents/skills/acta/SKILL.md` and places the bundled conventions in `docs/agents/conventions/`, without overwriting existing files.
 
 ## Commands
 
