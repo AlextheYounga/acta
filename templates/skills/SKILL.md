@@ -52,9 +52,9 @@ For a non-trivial change:
 
 4. Finish the planning record before modifying implementation files.
 
-5. Commit the planning files with the change they describe.
-
-Do not use Acta for trivial edits that do not benefit from a durable planning record.
+### Donts
+- Do not use Acta for trivial edits that do not benefit from a durable planning record.
+- Do not commit any changes yourself. 
 
 ## Write `01-idea.md`
 
