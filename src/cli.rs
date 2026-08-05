@@ -4,6 +4,7 @@ use crate::commands::agentsmd::agentsmd;
 use crate::commands::clarify::clarify;
 use crate::commands::init::init;
 use crate::commands::start::start;
+use crate::commands::worktrees::worktrees;
 use crate::utils::validate_name;
 
 #[derive(Parser)]
@@ -19,6 +20,7 @@ enum CommandKind {
     Init,
     Start { branch: String },
     Clarify { name: String },
+    Worktrees,
 }
 
 pub fn run(cli: Cli) -> Result<(), String> {
@@ -30,6 +32,7 @@ pub fn run(cli: Cli) -> Result<(), String> {
             start(topic_type, name)
         }
         CommandKind::Clarify { name } => clarify(&name),
+        CommandKind::Worktrees => worktrees(),
     }
 }
 

@@ -2,6 +2,7 @@ pub mod agentsmd;
 pub mod clarify;
 pub mod init;
 pub mod start;
+pub mod worktrees;
 
 pub const IDEA_TEMPLATE: &str = include_str!("../../templates/planning/01-idea.md");
 pub const PLAN_TEMPLATE: &str = include_str!("../../templates/planning/02-plan.md");

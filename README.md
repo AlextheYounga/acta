@@ -34,6 +34,14 @@ Choose an `AGENTS.md` template for the current directory:
 acta agentsmd
 ```
 
+Choose a worktree and copy its path to the clipboard:
+
+```bash
+acta worktrees
+```
+
+Clipboard support checks `wl-copy` (Wayland), `pbcopy` (macOS), `xclip`, and `xsel` in that order.
+
 ## Development
 
 ```bash
