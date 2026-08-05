@@ -12,3 +12,7 @@ pub const AGENT_TEMPLATES: &[(&str, &str)] = &[
     ("ponytail", include_str!("../../templates/agentsmd/ponytail.md")),
     ("wisedev", include_str!("../../templates/agentsmd/wisedev.md")),
 ];
+pub const CONVENTION_TEMPLATES: &[(&str, &str)] = &[
+    ("clean-code.md", include_str!("../../templates/conventions/clean-code.md")),
+    ("abstraction-guide.md", include_str!("../../templates/conventions/abstraction-guide.md")),
+];

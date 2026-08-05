@@ -18,6 +18,8 @@ Then initialize a Git repository:
 acta init
 ```
 
+Initialization also places the bundled conventions in `docs/agents/conventions/` without overwriting existing files.
+
 ## Commands
 
 Start a change with a configured Git Flow topic prefix:

@@ -1,17 +1,34 @@
 # Clarification
 
+<!--
+This document records a settled change to the existing planning record.
+
+Never use a clarification file to ask a question or preserve undecided
+alternatives.
+-->
+
 ## Trigger
 
-<!-- What prompted this clarification? -->
+<!-- State the new information or instruction that required clarification. -->
 
 ## Decision
 
-<!-- What was decided and why? -->
+<!-- State the settled decision and why it was made. -->
 
-## Superseded assumption
+## Supersedes
 
-<!-- Which earlier assumption or decision does this replace? -->
+<!--
+Identify the earlier definition, assumption, scope boundary, or decision
+this replaces. If it replaces nothing, state that it adds detail without
+changing an earlier decision.
+-->
 
-## Implementation effect
+## Effect on the record
 
-<!-- How does this affect the current plan? -->
+<!--
+Summarize the corresponding updates made to 01-idea.md, 02-plan.md,
+and 03-tasks.md.
+
+The clarification is not complete until the authoritative files reflect
+the new current truth.
+-->

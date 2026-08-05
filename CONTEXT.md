@@ -337,7 +337,7 @@ Possible result:
 
 The init command should prepare an existing Git repository for Acta.
 
-It should first verify that `~/.agents/skills/acta/SKILL.md` exists. It should then create the planning directory root and `.worktrees/`, and add the Acta exclusion block to the repository-local Git exclude file. Initialization should be idempotent and should not configure Git Flow or modify committed project files.
+It should first verify that `~/.agents/skills/acta/SKILL.md` exists. It should then create the planning directory root, copy missing convention templates into `docs/agents/conventions/`, create `.worktrees/`, and add the Acta exclusion block to the repository-local Git exclude file. Initialization should be idempotent, preserve existing convention files, and should not configure Git Flow or modify unrelated committed project files.
 
 ### `acta agentsmd`
 
